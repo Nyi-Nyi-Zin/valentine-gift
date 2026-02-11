@@ -8,7 +8,7 @@ import PhotoSlideshow from "@/components/PhotoSlideshow";
 import MusicToggle from "@/components/MusicToggle";
 
 const LOVE_MESSAGE =
-  "Happy Valentine's Day, my love... Every moment with you feels like a beautiful dream I never want to wake up from. You are my everything. 💕";
+  "Happy Valentine's Day, a thel... Every moment with you feels like a beautiful dream I never want to wake up from. You are my everything. 💕";
 
 const Index = () => {
   const [started, setStarted] = useState(false);
@@ -16,13 +16,9 @@ const Index = () => {
   const [musicPlaying, setMusicPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
+  // 1. handleBegin now ONLY starts the visual flow
   const handleBegin = useCallback(() => {
     setStarted(true);
-    // Uncomment when you add your song:
-    // if (audioRef.current) {
-    //   audioRef.current.play();
-    //   setMusicPlaying(true);
-    // }
   }, []);
 
   const toggleMusic = useCallback(() => {
@@ -35,15 +31,27 @@ const Index = () => {
     setMusicPlaying(!musicPlaying);
   }, [musicPlaying]);
 
+  // 2. Music starts here, triggered by the message ending
   const handleMessageComplete = useCallback(() => {
     setShowSlideshow(true);
+
+    if (audioRef.current) {
+      audioRef.current
+        .play()
+        .then(() => {
+          setMusicPlaying(true);
+        })
+        .catch((err) => {
+          console.log("Playback failed:", err);
+        });
+    }
   }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[hsl(var(--valentine-cream))] via-[hsl(var(--valentine-blush))] to-[hsl(var(--valentine-rose)/0.3)] overflow-x-hidden">
-      {/* Background music — add your MP3 src here */}
       <audio ref={audioRef} loop preload="auto">
-        {/* <source src="/your-song.mp3" type="audio/mpeg" /> */}
+        {/* Note: Ensure this path is correct relative to your public folder */}
+        <source src="/01. Fearless (Taylor’s Version).flac" type="audio/flac" />
       </audio>
 
       {!started && <WelcomeScreen onBegin={handleBegin} />}
@@ -57,7 +65,10 @@ const Index = () => {
 
           <div className="relative z-20 py-12">
             {!showSlideshow && (
-              <LoveMessage message={LOVE_MESSAGE} onComplete={handleMessageComplete} />
+              <LoveMessage
+                message={LOVE_MESSAGE}
+                onComplete={handleMessageComplete}
+              />
             )}
             {showSlideshow && (
               <div className="animate-fade-in">
@@ -73,5 +84,4 @@ const Index = () => {
     </div>
   );
 };
-
 export default Index;
