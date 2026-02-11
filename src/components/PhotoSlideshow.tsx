@@ -30,9 +30,9 @@ const PhotoSlideshow = ({ photos }: PhotoSlideshowProps) => {
   }, [images.length]);
 
   return (
-    <div className="flex items-center justify-center px-4 py-8">
+    <div className="flex items-center justify-center px-3 sm:px-4 py-4 sm:py-8">
       <div
-        className="relative rounded-2xl overflow-hidden max-w-2xl w-full aspect-[4/3]"
+        className="relative rounded-2xl overflow-hidden max-w-2xl w-full aspect-[3/4] sm:aspect-[4/3]"
         style={{ animation: "photo-glow 3s ease-in-out infinite" }}
       >
         <img

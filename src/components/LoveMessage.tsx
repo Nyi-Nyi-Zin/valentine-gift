@@ -25,8 +25,8 @@ const LoveMessage = ({ message, onComplete }: LoveMessageProps) => {
   }, [message, onComplete]);
 
   return (
-    <div className="flex items-center justify-center min-h-[60vh] px-6">
-      <p className="font-cursive text-3xl sm:text-4xl md:text-5xl text-primary text-center leading-relaxed max-w-3xl">
+    <div className="flex items-center justify-center min-h-[50vh] sm:min-h-[60vh] px-4 sm:px-6">
+      <p className="font-cursive text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary text-center leading-relaxed max-w-3xl">
         {displayed}
         {!done && (
           <span

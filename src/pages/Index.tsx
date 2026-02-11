@@ -40,7 +40,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[hsl(var(--valentine-cream))] via-[hsl(var(--valentine-blush))] to-[hsl(var(--valentine-rose)/0.3)]">
+    <div className="min-h-screen bg-gradient-to-br from-[hsl(var(--valentine-cream))] via-[hsl(var(--valentine-blush))] to-[hsl(var(--valentine-rose)/0.3)] overflow-x-hidden">
       {/* Background music — add your MP3 src here */}
       <audio ref={audioRef} loop preload="auto">
         {/* <source src="/your-song.mp3" type="audio/mpeg" /> */}
