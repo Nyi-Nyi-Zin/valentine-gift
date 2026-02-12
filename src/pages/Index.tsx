@@ -1,11 +1,14 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import FallingHearts from "@/components/FallingHearts";
 import RosePetals from "@/components/RosePetals";
 import FloatingParticles from "@/components/FloatingParticles";
 import LoveMessage from "@/components/LoveMessage";
-import PhotoSlideshow from "@/components/PhotoSlideshow";
+import PhotoSlideshow, {
+  PLACEHOLDER_PHOTOS,
+} from "@/components/PhotoSlideshow";
 import MusicToggle from "@/components/MusicToggle";
+import {} from "@/components/PhotoSlideshow";
 
 const LOVE_MESSAGE =
   "Happy Valentine's Day, a thel... Every moment with you feels like a beautiful dream I never want to wake up from. You are my everything. 💕";
@@ -15,6 +18,13 @@ const Index = () => {
   const [showSlideshow, setShowSlideshow] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    PLACEHOLDER_PHOTOS.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   // 1. handleBegin now ONLY starts the visual flow
   const handleBegin = useCallback(() => {
